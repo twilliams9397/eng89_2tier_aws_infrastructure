@@ -15,7 +15,7 @@
 - create 3 subnets (all within the VPC): a public app subnet (10.205.1.0/24), a private database subnet (10.205.2.0/24) and a bastion subnet (10.205.3.0/24)
 - create a public route table (add route 0.0.0.0/0 for all traffic) for the internet gateway, and associate it to the app and bastion subnets
 
-#### Security Groups
+### Security Groups
 
 App:
 - **inbound**: HTTP (port 80) and HTTPS (port 443) from anywhere (ensure there is a rule for IPv4 and IPv6), port 3000 from anywhere and SSH (port 22) from your personal IP
@@ -26,8 +26,29 @@ Database:
 Bastion:
 - **inbound**: SSH (port 22) from your personal IP
 
-#### Network ACLs
+### Network ACLs
 
 App (public subnet):
 - **inbound**: HTTP (port 80) and HTTPS (port 443) from everywhere, SSH (port 22) from personal IP and port range 1024-65535 from everywhere
-- **outbound**: 
+- **outbound**: HTTP (port 80) and HTTPS (port 443) to everywhere, Mongodb port 27017 to the database (private) IP and port range 1024-65535 to everywhere
+
+Database (private subnet):
+- **inbound**:
+- **outbound**:
+
+Bastion:
+- **inbound**:
+- **outbound**:
+
+### ec2 Instances
+- all created within the previously created VPC and with the same steps as https://github.com/twilliams9397/eng89_cloud_computing_aws/blob/main/README.md except the below settings for IPs and security groups:
+- app: use the public subnet, enable the public IP, apply the app security group
+- databse: use the private subnet, disable the public IP, apply the database security group (created from Amazon Machine Image which already had the necessary installs - see above README for details)
+- bastion: use the bastion subnet, enable the public IP, apply the bastion security group
+
+### Deploying the Web App
+- using the `scp` command, copy the .pem key into the bastion instance: `scp -i eng89_devops.pem eng89_devops.pem ubuntu@<bastion IP>:~`
+- using the `scp` command, copy the app folder into the app instance e.g. `scp -i eng89_devops.pem -r /Users/Tom1/Documents/Sparta/Vagrant/Dev_Env/eng89_dev_env/app ubuntu@<app IP>:~/app/`
+- once the key is correctly copied into the bastion instance, the database instance can be accessed via SSH from within the bastion instance
+- run `sudo systemctl status mongod` to ensure the databse is running
+- back in the app instance, ensure the `DB_HOST=mongodb://<IP>/27017` is the correct IP for the private database
