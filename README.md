@@ -18,3 +18,10 @@
 #### Security Groups
 
 App:
+- **inbound**: HTTP (port 80) and HTTPS (port 443) from anywhere (ensure there is a rule for IPv4 and IPv6), port 3000 from anywhere and SSH (port 22) from your personal IP
+
+Database:
+- **inbound**: Mongodb port 27017 from the app security group and SSH (port 22) from the bastion security group (must add this after bastion SG is created)
+
+Bastion:
+- **inbound**: SSH (port 22) from your personal IP
