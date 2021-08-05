@@ -4,8 +4,8 @@
 - each component has a different role within the infrastructure:
 - VPC: a virtual network, which can contain different network resources/components
 - Subnet: a subdivision of a larger network, can hold app server, database servers and bastion servers for example
-- Security Group: a set of inbound and outbound rules for specific instances on a network
-- Network ACL: a set of inbound and outbound rules that allow access to a subnet
+- Security Group: a set of inbound and outbound rules for specific instances on a network. Security groups are a type of STATEFUL firewall, which means that it remembers an outgoing connection and automatically allows the response from that address.
+- Network ACL: a set of inbound and outbound rules that allow access to a subnet. This is an example of a STATELESS firewall, where all ingoing and outgoing connections must be explicitly allowed as the deffault is to deny any connection.
 
 ## Steps to set up
 
@@ -13,4 +13,8 @@
 - begin by creating a VPC on AWS, for this example the IP is 10.205.0.0/16
 - create an internet gateway and attach it to the created VPC
 - create 3 subnets (all within the VPC): a public app subnet (10.205.1.0/24), a private database subnet (10.205.2.0/24) and a bastion subnet (10.205.3.0/24)
-- 
+- create a public route table (add route 0.0.0.0/0 for all traffic) for the internet gateway, and associate it to the app and bastion subnets
+
+#### Security Groups
+
+App:
