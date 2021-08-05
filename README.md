@@ -11,3 +11,6 @@
 
 ![2 tier with AWS](AWS_2tier.png)
 - begin by creating a VPC on AWS, for this example the IP is 10.205.0.0/16
+- create an internet gateway and attach it to the created VPC
+- create 3 subnets (all within the VPC): a public app subnet (10.205.1.0/24), a private database subnet (10.205.2.0/24) and a bastion subnet (10.205.3.0/24)
+- 
