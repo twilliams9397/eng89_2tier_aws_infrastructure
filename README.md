@@ -10,3 +10,4 @@
 ## Steps to set up
 
 ![2 tier with AWS](AWS_2tier.png)
+- begin by creating a VPC on AWS, for this example the IP is 10.205.0.0/16
