@@ -2,10 +2,10 @@
 - a 2-tier infrastructure can be setup via AWS by creating a virtual private cloud (VPC), with corresponding subnets, security groups and network access lists (ACLs)
 - also required is an internet gateway and routing tables - one public and one private
 - each component has a different role within the infrastructure:
-- VPC: 
-- Subnet:
-- Security Group:
-- Network ACL:
+- VPC: a virtual network, which can contain different network resources/components
+- Subnet: a subdivision of a larger network, can hold app server, database servers and bastion servers for example
+- Security Group: a set of inbound and outbound rules for specific instances on a network
+- Network ACL: a set of inbound and outbound rules that allow access to a subnet
 
 ## Steps to set up
 
