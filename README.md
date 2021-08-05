@@ -51,6 +51,6 @@ Bastion:
 - using the `scp` command, copy the app folder into the app instance e.g. `scp -i eng89_devops.pem -r /Users/Tom1/Documents/Sparta/Vagrant/Dev_Env/eng89_dev_env/app ubuntu@<app IP>:~/app/`
 - once the key is correctly copied into the bastion instance, the database instance can be accessed via SSH from within the bastion instance
 - run `sudo systemctl status mongod` to ensure the databse is running
-- back in the app instance, ensure the `DB_HOST=mongodb://<IP>/27017` is the correct IP for the private database and ensure the reverse proxy in `/etc/nginx/sites-available/default` has the correct IP - public app IP
+- back in the app instance, ensure the `DB_HOST=mongodb://<IP>/27017` environment variable is the correct IP for the private database and ensure the reverse proxy in `/etc/nginx/sites-available/default` has the correct IP - public app IP
 - navigate to the app folder and run `node seeds/seed.js` and then `node app.js`
 - the web app should now be running on your app's public IP address
