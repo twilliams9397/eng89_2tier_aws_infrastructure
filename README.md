@@ -25,3 +25,9 @@ Database:
 
 Bastion:
 - **inbound**: SSH (port 22) from your personal IP
+
+#### Network ACLs
+
+App (public subnet):
+- **inbound**: HTTP (port 80) and HTTPS (port 443) from everywhere, SSH (port 22) from personal IP and port range 1024-65535 from everywhere
+- **outbound**: 
